@@ -1,0 +1,2 @@
+proxy="http://proxy-md.ktn.group:3128"
+rejectUnauthorized=false
