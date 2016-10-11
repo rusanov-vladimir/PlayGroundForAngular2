@@ -15,7 +15,11 @@ namespace PlayGroundForWebApps.Controllers
             var path = Path.Combine(HostingEnvironment.MapPath("~"), "index.html");
             response.Content = new StringContent(File.ReadAllText(path));
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+
+
             return response;
+
+
         }
     }
 }
