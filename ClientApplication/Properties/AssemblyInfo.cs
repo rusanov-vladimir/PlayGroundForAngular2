@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PlayGroundForWebApps")]
+[assembly: AssemblyTitle("ClientApplication")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PlayGroundForWebApps")]
+[assembly: AssemblyProduct("ClientApplication")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8f40d940-6da4-4527-9bcb-0476d1861ab4")]
+[assembly: Guid("19f4b4a3-5fba-4e2b-a9ab-8f39b742a8b0")]
 
 // Version information for an assembly consists of the following four values:
 //

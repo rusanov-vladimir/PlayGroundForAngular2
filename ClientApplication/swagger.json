@@ -1,0 +1,162 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Web API Swagger specification",
+    "version": "1.0.0"
+  },
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/Heroes": {
+      "get": {
+        "tags": [
+          "HeroesController"
+        ],
+        "operationId": "Heroes_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {},
+            "x-nullable": true
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "HeroesController"
+        ],
+        "operationId": "Heroes_Post",
+        "parameters": [
+          {
+            "name": "newHero",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Hero"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {},
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "/api/Heroes/{id}": {
+      "get": {
+        "tags": [
+          "HeroesController"
+        ],
+        "operationId": "Heroes_Get2",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {},
+            "x-nullable": true
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HeroesController"
+        ],
+        "operationId": "Heroes_Put",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "name": "heroToUpdate",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Hero"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HeroesController"
+        ],
+        "operationId": "Heroes_Delete",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Home": {
+      "get": {
+        "tags": [
+          "HomeController"
+        ],
+        "operationId": "Home_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            },
+            "x-nullable": true
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Hero": {
+      "type": "object",
+      "x-typeName": "Hero",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "responses": {},
+  "securityDefinitions": {}
+}

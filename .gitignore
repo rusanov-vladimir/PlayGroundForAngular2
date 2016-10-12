@@ -164,3 +164,4 @@ typings/
 **/app/*.js.map
 **/e2e/*.js.map
 
+/WebApi/swagger.json

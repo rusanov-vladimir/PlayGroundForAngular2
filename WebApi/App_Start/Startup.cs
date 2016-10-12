@@ -15,7 +15,7 @@ namespace PlayGroundForWebApps
             HttpConfiguration config = new HttpConfiguration(); 
             WebApiConfig.Register(config);
 
-            const string rootFolder = "../../../PlayGroundForWebApps";
+            const string rootFolder = "../../../ClientApplication";
             var fileSystem = new PhysicalFileSystem(rootFolder);
             var options = new FileServerOptions
             {
