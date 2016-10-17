@@ -159,9 +159,9 @@ $RECYCLE.BIN/
 .vs/
 node_modules/
 typings/
-**/app/*.js
-**/e2e/*.js
-**/app/*.js.map
-**/e2e/*.js.map
+**/app/**/*.js
+**/e2e/**/*.js
+**/app/**/*.js.map
+**/e2e/**/*.js.map
 
 /WebApi/swagger.json

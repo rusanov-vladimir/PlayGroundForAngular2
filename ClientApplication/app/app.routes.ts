@@ -1,28 +1,21 @@
 ﻿import { Routes, RouterModule }  from '@angular/router';
-import { HeroesComponent } from './heroes.component';
-import { DashboardComponent } from './dashboard.component';
-import { HeroDetailComponent } from './hero-detail.component';
+import { ContainersComponent } from './components/containers.component';
+import { ContainerDetailComponent } from './components/container-detail.component';
 
 const routes: Routes = [
     {
-        path: 'heroes',
-        component: HeroesComponent,
-        pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent,
-        pathMatch: 'full'
-    },
-    {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/containers',
         pathMatch: 'full'
-        //terminal: true
+    },
+    {
+        path: 'containers',
+        component: ContainersComponent,
+        pathMatch: 'full'
     },
     {
         path: 'detail/:id',
-        component: HeroDetailComponent,
+        component: ContainerDetailComponent,
         pathMatch: 'full'
     },
 ];
