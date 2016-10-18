@@ -1,21 +1,34 @@
-﻿<h2 [style.color]="titleStyle">My Heroes</h2>
+﻿<h2 [style.color]="titleStyle">Available containers</h2>
 <hr [class]="classMap"/>
-<ul class="heroes">
-    <li *ngFor="let hero of heroes"
-         [class.selected]="hero === selectedHero"
-         (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-        <button class="delete-button" (click)="deleteHero(hero, $event)">Delete</button>
-    </li>
-</ul>
+
+<p-dataTable [value]="containers" [(selection)]="selectedContainer" [editable]="true" (onRowClick)="onSelect($event.data)"
+             reorderableColumns="true" rows="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [responsive]="true"
+             filterDelay="700" [lazy]="true" [totalRecords]="totalRecords" (onLazyLoad)="loadContainersLazy($event)">
+    <p-column field="id" header="Id" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="name" header="Name" [editable]="true" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="type" header="Type" [sortable]="true" [filter]="true" [style]="{'overflow':'visible'}">
+        <template let-col let-row="rowData" pTemplate type="body">
+            <p-dropdown [options]="containerTypes" [(ngModel)]="row[col.field]" [style]="{'width':'150px'}" editable="editable"></p-dropdown>
+        </template>
+    </p-column>
+    <p-column field="color" header="Color" [editable]="true" [sortable]="true" [filter]="true">
+        <template let-col let-row="rowData" pTemplate type="body">
+            <span [style.color]="row[col.field]">{{row[col.field]}}</span>
+        </template>
+    </p-column>
+</p-dataTable>
+
 <div class="error" *ngIf="error">{{error}}</div>
-<button (click)="addHero()">Add New Hero</button>
-<div *ngIf="addingHero">
-    <my-hero-detail (close)="close($event)"></my-hero-detail>
+
+<button style="margin: 5px 0 0 0" (click)="addContainer()">Add New Container</button>
+
+<div *ngIf="addingContainer">
+    <container-detail (close)="close($event)"></container-detail>
 </div>
-<div *ngIf="selectedHero">
+<div *ngIf="selectedContainer">
     <h2>
-        {{selectedHero.name | uppercase}} is my hero
+        You have selected container: {{selectedContainer.name | uppercase}}
     </h2>
     <button (click)="gotoDetail()">View Details</button>
 </div>
+

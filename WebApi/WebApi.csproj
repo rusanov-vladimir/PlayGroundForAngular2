@@ -88,9 +88,11 @@
     <Compile Include="App_Start\MiddleWare.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HeroesController.cs" />
+    <Compile Include="Controllers\ContainerTypesController.cs" />
+    <Compile Include="Controllers\ContainersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\Hero.cs" />
+    <Compile Include="Models\ContainerType.cs" />
+    <Compile Include="Models\Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

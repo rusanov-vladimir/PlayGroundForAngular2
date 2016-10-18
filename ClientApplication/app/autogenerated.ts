@@ -12,7 +12,7 @@ import {Http, Headers, Response, RequestOptionsArgs} from '@angular/http';
 export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 
 @Injectable()
-export class HeroesClient {
+export class ContainersClient {
     private http: Http = null; 
     private baseUrl: string = undefined; 
 
@@ -22,7 +22,7 @@ export class HeroesClient {
     }
 
     get(): Observable<any> {
-        let url_ = this.baseUrl + "/api/Heroes"; 
+        let url_ = this.baseUrl + "/api/Containers"; 
 
         const content_ = "";
         
@@ -53,10 +53,10 @@ export class HeroesClient {
         }
     }
 
-    post(newHero: Hero): Observable<any> {
-        let url_ = this.baseUrl + "/api/Heroes"; 
+    post(newContainer: Container): Observable<any> {
+        let url_ = this.baseUrl + "/api/Containers"; 
 
-        const content_ = JSON.stringify(newHero ? newHero.toJS() : null);
+        const content_ = JSON.stringify(newContainer ? newContainer.toJS() : null);
         
         return this.http.request(url_, {
             body: content_,
@@ -86,7 +86,7 @@ export class HeroesClient {
     }
 
     get2(id: number): Observable<any> {
-        let url_ = this.baseUrl + "/api/Heroes/{id}"; 
+        let url_ = this.baseUrl + "/api/Containers/{id}"; 
 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -121,14 +121,14 @@ export class HeroesClient {
         }
     }
 
-    put(id: number, heroToUpdate: Hero): Observable<void> {
-        let url_ = this.baseUrl + "/api/Heroes/{id}"; 
+    put(id: number, containerToUpdate: Container): Observable<void> {
+        let url_ = this.baseUrl + "/api/Containers/{id}"; 
 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
 
-        const content_ = JSON.stringify(heroToUpdate ? heroToUpdate.toJS() : null);
+        const content_ = JSON.stringify(containerToUpdate ? containerToUpdate.toJS() : null);
         
         return this.http.request(url_, {
             body: content_,
@@ -154,7 +154,7 @@ export class HeroesClient {
     }
 
     delete(id: number): Observable<void> {
-        let url_ = this.baseUrl + "/api/Heroes/{id}"; 
+        let url_ = this.baseUrl + "/api/Containers/{id}"; 
 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -178,6 +178,53 @@ export class HeroesClient {
         const status = response.status.toString(); 
 
         if (status === "204") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
+}
+
+@Injectable()
+export class ContainerTypesClient {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    get(): Observable<ContainerType[]> {
+        let url_ = this.baseUrl + "/api/ContainerTypes"; 
+
+        const content_ = "";
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processGet(response);
+        });
+    }
+
+    private processGet(response: Response) {
+        const data = response.text();
+        const status = response.status.toString(); 
+
+        if (status === "200") {
+            let result200: ContainerType[] = null; 
+            let resultData200 = data === "" ? null : JSON.parse(data);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(ContainerType.fromJS(item));
+            }
+            return result200; 
         }
         else
         {
@@ -229,25 +276,31 @@ export class HomeClient {
     }
 }
 
-export class Hero { 
+export class Container { 
     id: number; 
-    name: string;
+    name: string; 
+    type: number; 
+    color: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.id = data["id"] !== undefined ? data["id"] : null;
             this.name = data["name"] !== undefined ? data["name"] : null;
+            this.type = data["type"] !== undefined ? data["type"] : null;
+            this.color = data["color"] !== undefined ? data["color"] : null;
         }
     }
 
-    static fromJS(data: any): Hero {
-        return new Hero(data);
+    static fromJS(data: any): Container {
+        return new Container(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["id"] = this.id !== undefined ? this.id : null;
         data["name"] = this.name !== undefined ? this.name : null;
+        data["type"] = this.type !== undefined ? this.type : null;
+        data["color"] = this.color !== undefined ? this.color : null;
         return data; 
     }
 
@@ -257,6 +310,38 @@ export class Hero {
 
     clone() {
         var json = this.toJSON();
-        return new Hero(JSON.parse(json));
+        return new Container(JSON.parse(json));
+    }
+}
+
+export class ContainerType { 
+    value: number; 
+    label: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.value = data["value"] !== undefined ? data["value"] : null;
+            this.label = data["label"] !== undefined ? data["label"] : null;
+        }
+    }
+
+    static fromJS(data: any): ContainerType {
+        return new ContainerType(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["value"] = this.value !== undefined ? this.value : null;
+        data["label"] = this.label !== undefined ? this.label : null;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        var json = this.toJSON();
+        return new ContainerType(JSON.parse(json));
     }
 }
